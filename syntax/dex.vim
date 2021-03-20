@@ -7,9 +7,6 @@ if exists("b:current_syntax")
   finish
 endif
 
-syn match dexLineComment "---*\(.*\)\?$"
-syn region dexProseBlock start="^'" end="\n\n"
-
 syn keyword dexKeywords 
       \ def
       \ for
@@ -24,6 +21,7 @@ syn keyword dexKeywords
       \ interface
       \ instance
       \ where
+      \ import
 
 syn match dexNumber "\<[0-9]\+\>\|\<[0-9_]\+\>\|\<0[xX][0-9a-fA-F_]\+\>\|\<0[oO][0-7_]\+\>\|\<0[bB][10_]\+\>"
 syn match dexFloat "\<[0-9]\+\.[0-9_]\+\([eE][-+]\=[0-9_]\+\)\=\>"
@@ -33,13 +31,20 @@ syn match dexOperators "[-!#$%&\*\+/<=>\?@\\^|~:.]\+\|\<_\>"
 syn match dexType "\<[A-Z][a-zA-Z0-9_']*\>"
 syn match dexExpectedOutput "^>.*"
 
+syn region dexProseBlock start="^'" end="\n\n"
 
-highlight default link dexLineComment Comment
-highlight default link dexProseBlock Comment
-highlight default link dexExpectedOutput Comment
+syn match dexLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
+  \ contains=
+  \ haskellTodo,
+  \ @Spell
+
+
 highlight default link dexKeywords Keyword
 highlight default link dexNumber Number
 highlight default link dexFloat Float
 highlight default link dexOperators Operator
+highlight default link dexLineComment Comment
+highlight default link dexProseBlock Comment
+highlight default link dexExpectedOutput Comment
 highlight default link dexType Type
 highlight default link dexIdentifier Identifier
