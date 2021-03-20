@@ -33,9 +33,8 @@ syn match dexExpectedOutput "^>.*"
 
 syn region dexProseBlock start="^'" end="\n\n"
 
-syn match dexLineComment "---*\([^-!#$%&\*\+./<=>\?@\\^|~].*\)\?$"
+syn match dexLineComment "--.*$"
   \ contains=
-  \ haskellTodo,
   \ @Spell
 
 
