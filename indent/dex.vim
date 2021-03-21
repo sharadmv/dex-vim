@@ -6,8 +6,8 @@ function! DexIndent()
   let previous = getline(previousNum)
   let prevline = getline(v:lnum - 1)
 
-  if prevline =~ '.*=$'
-    return &shiftwidth
+  if prevline =~ '.*[=.]$'
+    return indent(v:lnum - 1) + &shiftwidth
   endif
   return indent(v:lnum - 1)
 
