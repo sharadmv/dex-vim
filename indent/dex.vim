@@ -4,9 +4,15 @@ function! DexIndent()
   let line = getline(v:lnum)
   let previousNum = prevnonblank(v:lnum - 1)
   let previous = getline(previousNum)
+  let prevline = getline(v:lnum - 1)
 
-  if previous =~ "{" && previous !~ "}" && line !~ "}" && line !~ ":$"
-    return indent(previousNum) + &tabstop
+  if prevline =~ '.*=$'
+    return &shiftwidth
+  endif
+  return indent(v:lnum - 1)
+
+  if prevline =~ '^\s*$' && line !~ '^\s*\S'
+    return 0
   endif
 
 endfunction
