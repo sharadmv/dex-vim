@@ -27,13 +27,15 @@ syn match dexNumber "\<[0-9]\+\>\|\<[0-9_]\+\>\|\<0[xX][0-9a-fA-F_]\+\>\|\<0[oO]
 syn match dexFloat "\<[0-9]\+\.[0-9_]\+\([eE][-+]\=[0-9_]\+\)\=\>"
 
 syn match dexOperators "[-!#$%&\*\+/<=>\?@\\^|~:.]\+\|\<_\>"
+syn match dexLollipop "--o"
 
 syn match dexType "\<[A-Z][a-zA-Z0-9_']*\>"
 syn match dexExpectedOutput "^>.*"
 
 syn region dexProseBlock start="^'" end="\n\n"
 
-syn match dexLineComment "--.*$"
+" Don't match on the lollipop symbol --o
+syn match dexLineComment "--[^o].*$"
   \ contains=
   \ @Spell
 
@@ -42,6 +44,7 @@ highlight default link dexKeywords Keyword
 highlight default link dexNumber Number
 highlight default link dexFloat Float
 highlight default link dexOperators Operator
+highlight default link dexLollipop Operator
 highlight default link dexLineComment Comment
 highlight default link dexProseBlock Comment
 highlight default link dexExpectedOutput Comment
